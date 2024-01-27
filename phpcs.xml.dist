@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="custom-framework">
+  <arg name="extensions" value="php"/>
+  <rule ref="PSR12"/>
+  <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
+  <rule ref="Generic.Files.LineLength"/>
+
+  <file>./src</file>
+</ruleset>

@@ -1,0 +1,7 @@
+/vendor/
+/var/
+/.env
+/docker/*/data/
+!/docker/*/data/.gitkeep
+/public/build/
+/.php-cs-fixer.cache

@@ -1,0 +1,45 @@
+{
+    "name": "forestcitylabs/notes",
+    "type": "project",
+    "license": "GPL-3.0-or-later",
+    "autoload": {
+        "psr-4": {
+            "Application\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Luke Bainbridge",
+            "email": "luke.bainbridge@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "forestcitylabs/framework": "dev-main",
+        "dflydev/fig-cookies": "^3.1",
+        "doctrine/migrations": "^3.7",
+        "doctrine/orm": "^2.17",
+        "guzzlehttp/psr7": "^2.6",
+        "http-interop/http-factory-guzzle": "^1.2",
+        "http-interop/response-sender": "^1.0",
+        "league/event": "^3.0",
+        "league/flysystem": "^3.23",
+        "monolog/monolog": "^3.5",
+        "nikic/fast-route": "^1.3",
+        "php-di/php-di": "^7.0",
+        "ramsey/uuid-doctrine": "^2.0",
+        "symfony/property-access": "^7.0",
+        "twig/twig": "^3.8",
+        "vlucas/phpdotenv": "^5.6",
+        "webonyx/graphql-php": "^15.9",
+        "cocur/slugify": "^4.5"
+    },
+    "require-dev": {
+        "filp/whoops": "^2.15",
+        "kint-php/kint": "^5.1",
+        "nette/php-generator": "^4.1",
+        "nikic/php-parser": "^5.0",
+        "psy/psysh": "^0.12.0"
+    }
+}
