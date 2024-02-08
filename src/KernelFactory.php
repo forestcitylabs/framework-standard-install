@@ -45,6 +45,7 @@ class KernelFactory
 
         if ((bool) ('dev' === getenv('ENVIRONMENT'))) {
             $packages[] = __DIR__ . '/../config/packages/development.php';
+            $packages[] = __DIR__ . '/../config/packages/generator.php';
         }
 
         return $packages;
