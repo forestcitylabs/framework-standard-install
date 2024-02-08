@@ -21,7 +21,6 @@ return [
     // Main application.
     Application::class => create()
         ->constructor('Forest City Labs Framework Console')
-        ->method('setCatchExceptions', false)
         ->method('setHelperSet', get(HelperSet::class))
         ->method('addCommands', get('console.commands')),
 
