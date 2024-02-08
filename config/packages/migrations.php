@@ -32,6 +32,8 @@ return [
     })
         ->parameter('migration_paths', get('migration.paths')),
 
+    'migration.paths' => add([]),
+
     DependencyFactory::class => factory([DependencyFactory::class, 'fromEntityManager']),
     EntityManagerLoader::class => autowire(ExistingEntityManager::class),
 
