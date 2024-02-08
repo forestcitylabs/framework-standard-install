@@ -7,7 +7,6 @@ use ForestCityLabs\Framework\Kernel;
 use ForestCityLabs\Framework\Middleware\AllowedHostMiddleware;
 use ForestCityLabs\Framework\Middleware\CookiesMiddleware;
 use ForestCityLabs\Framework\Middleware\DefaultCacheMiddleware;
-use ForestCityLabs\Framework\Middleware\FlashMiddleware;
 use ForestCityLabs\Framework\Middleware\GeneratedByMiddleware;
 use ForestCityLabs\Framework\Middleware\GraphiQLMiddleware;
 use ForestCityLabs\Framework\Middleware\GraphQLMiddleware;
@@ -15,7 +14,6 @@ use ForestCityLabs\Framework\Middleware\HttpForbiddenMiddleware;
 use ForestCityLabs\Framework\Middleware\HttpNotFoundMiddleware;
 use ForestCityLabs\Framework\Middleware\HttpUnauthorizedMiddleware;
 use ForestCityLabs\Framework\Middleware\RoutingMiddleware;
-use ForestCityLabs\Framework\Middleware\SessionMiddleware;
 use ForestCityLabs\Framework\Middleware\TrailingSlashMiddleware;
 use ForestCityLabs\Framework\Middleware\WhoopsMiddleware;
 use Psr\Container\ContainerInterface;
@@ -101,13 +99,11 @@ class KernelFactory
         $kernel->addMiddleware(HttpForbiddenMiddleware::class);
         $kernel->addMiddleware(HttpNotFoundMiddleware::class);
 
-        // Allowed hosts and CORS middleware.
+        // Allowed hosts middleware.
         $kernel->addMiddleware(AllowedHostMiddleware::class);
 
-        // Cookie and session middleware.
+        // Cookie middleware.
         $kernel->addMiddleware(CookiesMiddleware::class);
-        $kernel->addMiddleware(SessionMiddleware::class);
-        $kernel->addMiddleware(FlashMiddleware::class);
 
         // GraphiQL middleware for development.
         if ($container->get('app.debug')) {

@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 use ForestCityLabs\Framework\Middleware\AllowedHostMiddleware;
 use ForestCityLabs\Framework\Middleware\BearerTokenAuthenticationMiddleware;
+use ForestCityLabs\Framework\Middleware\CorsMiddleware;
 use ForestCityLabs\Framework\Middleware\SessionAuthenticationMiddleware;
 use ForestCityLabs\Framework\Security\Attribute\RequiresRole;
 use ForestCityLabs\Framework\Security\Attribute\RequiresScope;
@@ -30,6 +31,10 @@ return [
         RequiresScope::class,
         RequiresRole::class,
     ]),
+    'security.cors.allow_origins' => add([]),
+    'security.cors.allow_methods' => add([]),
+    'security.cors.allow_headers' => add([]),
+    'security.cors.max_age' => 3600,
 
     // Permission, scope and requirements registry.
     RoleRegistry::class => autowire()
@@ -42,6 +47,11 @@ return [
     // Security middlewares.
     AllowedHostMiddleware::class => autowire()
         ->constructor(get('security.allowed_hosts')),
+    CorsMiddleware::class => autowire()
+        ->constructorParameter('allow_origins', get('security.cors.allow_origins'))
+        ->constructorParameter('allow_headers', get('security.cors.allow_headers'))
+        ->constructorParameter('allow_methods', get('security.cors.allow_methods'))
+        ->constructorParameter('max_age', get('security.cors.max_age')),
     SessionAuthenticationMiddleware::class => autowire()
         ->constructorParameter('path_regex', get('security.session_auth_paths')),
     BearerTokenAuthenticationMiddleware::class => autowire()

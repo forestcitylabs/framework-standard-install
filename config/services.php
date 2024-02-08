@@ -30,20 +30,9 @@ return [
     })->parameter('environment', get('app.environment')),
 
     // Security configuration.
-    'security.session_auth_paths' => '/^.*$/',
-    'security.token_auth_paths' => '/^.*$/',
     'security.allowed_hosts' => add([
         env('TRUSTED_HOST', 'localhost'),
     ]),
-    'security.roles' => add(['admin' => true]),
-    'security.scopes' => add([
-        'admin' => true,
-        'write' => false,
-        'read' => false,
-    ]),
-    'security.cors.allow_origins' => add([]),
-    'security.cors.allow_methods' => add([]),
-    'security.cors.allow_headers' => add([]),
 
     // GraphQL configuration.
     'graphql.types' => add([]),
@@ -95,9 +84,6 @@ return [
         'Application\\Migrations' => string('{app.project_root}/migrations'),
     ]),
 
-    // Fixtures configuration.
-    'fixtures.directory' => string('{app.project_root}/fixtures'),
-
     // Router configuration.
     'router.controllers' => add([]),
 
@@ -107,7 +93,6 @@ return [
     'twig.template_directories' => add([
         string('{app.project_root}/templates'),
     ]),
-    'twig.extensions.manifest.path' => string('{app.web_root}/build/manifest.json'),
 
     // Console configuration.
     'console.commands' => add([]),
