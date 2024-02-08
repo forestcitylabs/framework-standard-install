@@ -16,12 +16,13 @@ use Psr\Log\LoggerInterface;
 use function DI\autowire;
 use function DI\create;
 use function DI\get;
+use function DI\string;
 
 return [
     // Logger service configs.
     StreamHandler::class => create()
         ->constructor(get('logger.path')),
     LoggerInterface::class => autowire(Logger::class)
-        ->constructor('app')
+        ->constructor(string('{app.name}'))
         ->method('setHandlers', get('logger.handlers')),
 ];

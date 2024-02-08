@@ -20,6 +20,8 @@ use function DI\string;
 
 return [
     // Application configuration.
+    'app.name' => 'Application',
+    'app.version' => 'dev-main',
     'app.environment' => env('ENVIRONMENT'),
     'app.project_root' => realpath(__DIR__ . '/..'),
     'app.web_root' => string('{app.project_root}/public'),
