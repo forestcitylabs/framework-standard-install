@@ -18,6 +18,7 @@ use ForestCityLabs\Framework\Security\Attribute\RequiresScope;
 use ForestCityLabs\Framework\Security\RequirementRegistry;
 use ForestCityLabs\Framework\Security\RoleRegistry;
 use ForestCityLabs\Framework\Security\ScopeRegistry;
+use ForestCityLabs\Framework\EventListeners\SecurityPreRouteDispatchListener;
 
 use function DI\add;
 use function DI\autowire;
@@ -56,4 +57,9 @@ return [
         ->constructorParameter('path_regex', get('security.session_auth_paths')),
     BearerTokenAuthenticationMiddleware::class => autowire()
         ->constructorParameter('path_regex', get('security.token_auth_paths')),
+
+    // Event listeners.
+    'event.listeners' => add([
+        SecurityPreRouteDispatchListener::class,
+    ]),
 ];
