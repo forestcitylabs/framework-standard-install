@@ -9,7 +9,6 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-use Cache\Namespaced\NamespacedCachePool;
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManager;
