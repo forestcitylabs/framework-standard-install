@@ -9,6 +9,7 @@ use ForestCityLabs\Framework\Middleware\CookiesMiddleware;
 use ForestCityLabs\Framework\Middleware\DefaultCacheMiddleware;
 use ForestCityLabs\Framework\Middleware\FlashMiddleware;
 use ForestCityLabs\Framework\Middleware\GeneratedByMiddleware;
+use ForestCityLabs\Framework\Middleware\GraphiQLMiddleware;
 use ForestCityLabs\Framework\Middleware\GraphQLMiddleware;
 use ForestCityLabs\Framework\Middleware\HttpForbiddenMiddleware;
 use ForestCityLabs\Framework\Middleware\HttpNotFoundMiddleware;
@@ -107,6 +108,11 @@ class KernelFactory
         $kernel->addMiddleware(CookiesMiddleware::class);
         $kernel->addMiddleware(SessionMiddleware::class);
         $kernel->addMiddleware(FlashMiddleware::class);
+
+        // GraphiQL middleware for development.
+        if ($container->get('app.debug')) {
+            $kernel->addMiddleware(GraphiQLMiddleware::class);
+        }
 
         // The main routing middlewares.
         $kernel->addMiddleware(TrailingSlashMiddleware::class);
