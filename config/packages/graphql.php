@@ -9,6 +9,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
+use ForestCityLabs\Framework\Command\GraphQLDumpSchemaCommand;
 use ForestCityLabs\Framework\Command\GraphQLValidateSchemaCommand;
 use ForestCityLabs\Framework\GraphQL\MetadataProvider;
 use ForestCityLabs\Framework\GraphQL\TypeRegistry;
@@ -41,5 +42,6 @@ return [
         ->constructor(get('graphql.value_transformers')),
     'console.commands' => add([
         get(GraphQLValidateSchemaCommand::class),
+        get(GraphQLDumpSchemaCommand::class),
     ])
 ];
