@@ -14,7 +14,6 @@ use ForestCityLabs\Framework\Command\CacheClearCommand;
 use League\Flysystem\Local\LocalFilesystemAdapter;
 use League\Flysystem\Filesystem;
 use Psr\Cache\CacheItemPoolInterface;
-use Psr\SimpleCache\CacheInterface;
 
 use function DI\add;
 use function DI\autowire;
@@ -36,9 +35,6 @@ return [
 
     // Auto-wire default cache pool.
     CacheItemPoolInterface::class => get('cache.pool.default'),
-
-    // Using simple cache defaults to the base pool.
-    CacheInterface::class => get('cache.base_pool'),
 
     // Cache clear command.
     CacheClearCommand::class => autowire()->constructor(get('cache.pools'), get('cache.paths')),
