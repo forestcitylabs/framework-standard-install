@@ -15,6 +15,9 @@
     ],
     "minimum-stability": "dev",
     "prefer-stable": true,
+    "config": {
+        "sort-packages": true
+    },
     "require": {
         "forestcitylabs/framework": "dev-main",
         "dflydev/fig-cookies": "^3.1",
