@@ -9,29 +9,16 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-use ForestCityLabs\Framework\Cache\Pool\FilesystemCachePool;
 use ForestCityLabs\Framework\Command\CacheClearCommand;
-use League\Flysystem\Local\LocalFilesystemAdapter;
-use League\Flysystem\Filesystem;
 use Psr\Cache\CacheItemPoolInterface;
 
 use function DI\add;
 use function DI\autowire;
-use function DI\create;
 use function DI\get;
-use function DI\string;
 
 return [
-    'cache.adapter' => create(LocalFilesystemAdapter::class)
-        ->constructor(string('{app.project_root}/var/cache')),
-    'cache.filesystem' => create(Filesystem::class)
-        ->constructor(get('cache.adapter')),
-    'cache.pool.default' => create(FilesystemCachePool::class)
-        ->constructor(get('cache.filesystem')),
-    'cache.pools' => add([
-        get('cache.pool.default'),
-    ]),
     'cache.paths' => add([]),
+    'cache.pools' => add([]),
 
     // Auto-wire default cache pool.
     CacheItemPoolInterface::class => get('cache.pool.default'),
@@ -41,6 +28,6 @@ return [
 
     // Console commands.
     'console.commands' => add([
-        get(\ForestCityLabs\Framework\Command\CacheClearCommand::class),
+        get(CacheClearCommand::class),
     ]),
 ];

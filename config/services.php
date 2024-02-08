@@ -57,6 +57,15 @@ return [
 
     // Cache configuration.
     'cache.paths' => add([string('{app.project_root}/var/cache/CompiledContainer.php')]),
+    'cache.adapter' => create(\League\Flysystem\Local\LocalFilesystemAdapter::class)
+        ->constructor(string('{app.project_root}/var/cache')),
+    'cache.filesystem' => create(\League\Flysystem\Filesystem::class)
+        ->constructor(get('cache.adapter')),
+    'cache.pool.default' => create(\ForestCityLabs\Framework\Cache\Pool\FilesystemCachePool::class)
+        ->constructor(get('cache.filesystem')),
+    'cache.pools' => add([
+        get('cache.pool.default'),
+    ]),
 
     // Session configuration.
     'session.filesystem.adapter' => create(\League\Flysystem\Local\LocalFilesystemAdapter::class)
