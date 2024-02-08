@@ -66,9 +66,7 @@ return [
         Connection $connection,
         Configuration $configuration
     ) {
-        $em = EntityManager::create($connection, $configuration);
-
-        return $em;
+        return new EntityManager($connection, $configuration);
     }),
 
     // Entity manager provider for console commands.
