@@ -29,11 +29,6 @@ return [
         return (bool) ('dev' === $environment);
     })->parameter('environment', get('app.environment')),
 
-    // Security configuration.
-    'security.allowed_hosts' => add([
-        env('TRUSTED_HOST', 'localhost'),
-    ]),
-
     // GraphQL configuration.
     'graphql.types' => add([]),
     'graphql.controllers' => add([]),

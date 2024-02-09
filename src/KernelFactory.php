@@ -36,7 +36,7 @@ class KernelFactory
             __DIR__ . '/../config/packages/orm.php',
             __DIR__ . '/../config/packages/property_access.php',
             __DIR__ . '/../config/packages/router.php',
-            __DIR__ . '/../config/packages/security.php',
+            __DIR__ . '/../config/packages/security_allowed_hosts.php',
             __DIR__ . '/../config/packages/session.php',
             __DIR__ . '/../config/packages/twig.php',
             __DIR__ . '/../config/packages/utility.php',
