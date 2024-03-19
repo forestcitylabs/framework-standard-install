@@ -17,15 +17,20 @@ use FastRoute\RouteParser as RouteParserInterface;
 use FastRoute\RouteParser\Std as RouteParser;
 use ForestCityLabs\Framework\Routing\DataLoader;
 use ForestCityLabs\Framework\Routing\MetadataProvider;
+use ForestCityLabs\Framework\Utility\ClassDiscovery\ScanDirectoryDiscovery;
 
 use function DI\add;
 use function DI\autowire;
+use function DI\create;
 use function DI\factory;
 use function DI\get;
+use function DI\string;
 
 return [
     // Routing configuration.
-    'router.controllers' => add([]),
+    'router.paths' => add([string('{app.project_root}/src/Controller')]),
+    'router.class_discovery' => create(ScanDirectoryDiscovery::class)
+        ->constructor(get('router.paths')),
 
     // Routing services.
     RouteParserInterface::class => autowire(RouteParser::class),
@@ -36,5 +41,5 @@ return [
         return new RouteDispatcher($data_loader->loadRoutes());
     }),
     MetadataProvider::class => autowire()
-        ->constructor(get('router.controllers')),
+        ->constructor(get('router.class_discovery')),
 ];

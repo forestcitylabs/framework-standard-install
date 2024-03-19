@@ -10,21 +10,26 @@ declare(strict_types=1);
  */
 
 use ForestCityLabs\Framework\Event\ListenerProvider;
+use ForestCityLabs\Framework\Utility\ClassDiscovery\ScanDirectoryDiscovery;
 use League\Event\EventDispatcher;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\EventDispatcher\ListenerProviderInterface;
 
 use function DI\add;
 use function DI\autowire;
+use function DI\create;
 use function DI\get;
+use function DI\string;
 
 return [
     // Event listeners.
-    'event.listeners' => add([]),
+    'event.listener_paths' => add([string('{app.project_root}/src/EventListener')]),
+    'event.listener_discovery' => create(ScanDirectoryDiscovery::class)
+        ->constructor(get('event.listener_paths')),
 
     // Listener provider and event dispatcher.
     ListenerProviderInterface::class => autowire(ListenerProvider::class)
-        ->constructor(get('event.listeners')),
+        ->constructor(get('event.listener_discovery')),
     EventDispatcherInterface::class => autowire(EventDispatcher::class)
         ->constructor(get(ListenerProviderInterface::class)),
 ];

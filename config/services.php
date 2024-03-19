@@ -30,14 +30,9 @@ return [
     })->parameter('environment', get('app.environment')),
 
     // GraphQL configuration.
-    'graphql.types' => add([]),
-    'graphql.controllers' => add([]),
     'graphql.value_transformers' => add([
         get(DateTimeValueTransformer::class),
     ]),
-
-    // Event listeners.
-    'event.listeners' => add([]),
 
     // Cache configuration.
     'cache.paths' => add([string('{app.project_root}/var/cache/CompiledContainer.php')]),
@@ -78,9 +73,6 @@ return [
     'migration.paths' => add([
         'Application\\Migrations' => string('{app.project_root}/migrations'),
     ]),
-
-    // Router configuration.
-    'router.controllers' => add([]),
 
     // Twig configuration.
     'twig.cache_directory' => string('{app.project_root}/var/cache/twig'),

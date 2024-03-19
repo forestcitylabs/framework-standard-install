@@ -16,21 +16,32 @@ use ForestCityLabs\Framework\GraphQL\TypeRegistry;
 use ForestCityLabs\Framework\GraphQL\ValueTransformer\ChainedValueTransformer;
 use ForestCityLabs\Framework\GraphQL\ValueTransformer\ValueTransformerInterface;
 use ForestCityLabs\Framework\Middleware\GraphQLMiddleware;
+use ForestCityLabs\Framework\Utility\ClassDiscovery\ScanDirectoryDiscovery;
 use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Schema;
 
 use function DI\add;
 use function DI\autowire;
+use function DI\create;
 use function DI\factory;
 use function DI\get;
+use function DI\string;
 
 return [
+    // Configurations.
+    'graphql.type_paths' => add([string('{app.project_root}/src/Entity')]),
+    'graphql.controller_paths' => add([string('{app.project_root}/src/Controller')]),
+    'graphql.type_discovery' => create(ScanDirectoryDiscovery::class)
+        ->constructor(get('graphql.type_paths')),
+    'graphql.controller_discovery' => create(ScanDirectoryDiscovery::class)
+        ->constructor(get('graphql.controller_paths')),
+
     // Middleware services.
     GraphQLMiddleware::class => autowire()
         ->constructorParameter('debug', get('app.debug')),
     MetadataProvider::class => autowire()
-        ->constructorParameter('types', get('graphql.types'))
-        ->constructorParameter('controllers', get('graphql.controllers')),
+        ->constructorParameter('type_discovery', get('graphql.type_discovery'))
+        ->constructorParameter('controller_discovery', get('graphql.controller_discovery')),
     Schema::class => factory(function (TypeRegistry $type_registry) {
         return new Schema([
             'query' => $type_registry->getType('Query'),
