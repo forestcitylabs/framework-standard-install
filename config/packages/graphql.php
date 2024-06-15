@@ -10,10 +10,13 @@ declare(strict_types=1);
  */
 
 use ForestCityLabs\Framework\Command\GraphQLDumpSchemaCommand;
+use ForestCityLabs\Framework\Command\GraphQLGenerateFromSchema;
+use ForestCityLabs\Framework\Command\GraphQLSchemaDiffCommand;
 use ForestCityLabs\Framework\Command\GraphQLValidateSchemaCommand;
 use ForestCityLabs\Framework\GraphQL\MetadataProvider;
 use ForestCityLabs\Framework\GraphQL\TypeRegistry;
 use ForestCityLabs\Framework\GraphQL\ValueTransformer\ChainedValueTransformer;
+use ForestCityLabs\Framework\GraphQL\ValueTransformer\EnumValueTransformer;
 use ForestCityLabs\Framework\GraphQL\ValueTransformer\ValueTransformerInterface;
 use ForestCityLabs\Framework\Middleware\GraphQLMiddleware;
 use ForestCityLabs\Framework\Utility\ClassDiscovery\ScanDirectoryDiscovery;
@@ -51,8 +54,20 @@ return [
     }),
     ValueTransformerInterface::class => autowire(ChainedValueTransformer::class)
         ->constructor(get('graphql.value_transformers')),
+    GraphQLGenerateFromSchema::class => autowire()
+        ->constructorParameter('schema_file', string('{app.project_root}/config/schema.graphql'))
+        ->constructorParameter('entity_dir', string('{app.project_root}/src/Entity/'))
+        ->constructorParameter('entity_namespace', 'Application\\Entity')
+        ->constructorParameter('entity_discovery', get('graphql.type_discovery'))
+        ->constructorParameter('controller_dir', string('{app.project_root}/src/Controller/'))
+        ->constructorParameter('controller_namespace', 'Application\\Controller')
+        ->constructorParameter('controller_discovery', get('graphql.controller_discovery')),
+    GraphQLSchemaDiffCommand::class => autowire()
+        ->constructorParameter('schema_file', string('{app.project_root}/config/schema.graphql')),
     'console.commands' => add([
         get(GraphQLValidateSchemaCommand::class),
         get(GraphQLDumpSchemaCommand::class),
+        get(GraphQLGenerateFromSchema::class),
+        get(GraphQLSchemaDiffCommand::class),
     ])
 ];
