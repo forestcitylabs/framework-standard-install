@@ -14,6 +14,7 @@ use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Tools\Console\Command;
 use Doctrine\DBAL\Tools\Console\ConnectionProvider;
 use Doctrine\DBAL\Tools\Console\ConnectionProvider\SingleConnectionProvider;
+use Doctrine\DBAL\Tools\DsnParser;
 use Doctrine\DBAL\Types\Type;
 use Ramsey\Uuid\Doctrine\UuidBinaryOrderedTimeType;
 use Ramsey\Uuid\Doctrine\UuidBinaryType;
@@ -27,7 +28,9 @@ use function DI\get;
 return [
     // DBAL connection.
     Connection::class => factory(function (string $database_uri) {
-        $connection = DriverManager::getConnection(['url' => $database_uri]);
+        $connection = DriverManager::getConnection(
+            (new DsnParser())->parse($database_uri)
+        );
         $platform = $connection->getDatabasePlatform();
 
         // Add the uuid types to the DBAL.
