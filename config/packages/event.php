@@ -10,6 +10,8 @@ declare(strict_types=1);
  */
 
 use ForestCityLabs\Framework\Event\ListenerProvider;
+use ForestCityLabs\Framework\Utility\ClassDiscovery\ChainedDiscovery;
+use ForestCityLabs\Framework\Utility\ClassDiscovery\ManualDiscovery;
 use ForestCityLabs\Framework\Utility\ClassDiscovery\ScanDirectoryDiscovery;
 use League\Event\EventDispatcher;
 use Psr\EventDispatcher\EventDispatcherInterface;
@@ -23,13 +25,23 @@ use function DI\string;
 
 return [
     // Event listeners.
+    'event.listeners' => add([]),
     'event.listener_paths' => add([string('{app.project_root}/src/EventListener')]),
-    'event.listener_discovery' => create(ScanDirectoryDiscovery::class)
+
+    // Event listener discovery.
+    'event.listener_discovery.dynamic' => create(ScanDirectoryDiscovery::class)
         ->constructor(get('event.listener_paths')),
+    'event.listener_discovery.static' => create(ManualDiscovery::class)
+        ->constructor(get('event.listeners')),
+    'event.listener_discovery.chained' => create(ChainedDiscovery::class)
+        ->constructor(add([
+            get('event.listener_discovery.dynamic'),
+            get('event.listener_discovery.static'),
+        ])),
 
     // Listener provider and event dispatcher.
     ListenerProviderInterface::class => autowire(ListenerProvider::class)
-        ->constructor(get('event.listener_discovery')),
+        ->constructor(get('event.listener_discovery.chained')),
     EventDispatcherInterface::class => autowire(EventDispatcher::class)
         ->constructor(get(ListenerProviderInterface::class)),
 ];

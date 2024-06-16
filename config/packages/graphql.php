@@ -33,7 +33,7 @@ use function DI\string;
 return [
     // Configurations.
     'graphql.type_paths' => add([string('{app.project_root}/src/Entity')]),
-    'graphql.controller_paths' => add([string('{app.project_root}/src/Controller')]),
+    'graphql.controller_paths' => add([string('{app.project_root}/src/Controller/GraphQL')]),
     'graphql.type_discovery' => create(ScanDirectoryDiscovery::class)
         ->constructor(get('graphql.type_paths')),
     'graphql.controller_discovery' => create(ScanDirectoryDiscovery::class)

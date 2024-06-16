@@ -9,6 +9,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
+use ForestCityLabs\Framework\EventListeners\SecurityPreGraphQLFieldResolveListener;
 use ForestCityLabs\Framework\Middleware\BearerTokenAuthenticationMiddleware;
 use ForestCityLabs\Framework\Middleware\SessionAuthenticationMiddleware;
 use ForestCityLabs\Framework\Security\Attribute\RequiresRole;
@@ -48,5 +49,6 @@ return [
     // Event listeners.
     'event.listeners' => add([
         SecurityPreRouteDispatchListener::class,
+        SecurityPreGraphQLFieldResolveListener::class,
     ]),
 ];
