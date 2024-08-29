@@ -51,7 +51,7 @@ return [
         ]);
     }),
     TransformerManager::class => autowire()
-      ->constructor(get('graphql.transormers')),
+      ->constructor(get('graphql.transformers')),
     GraphQLGenerateFromSchema::class => autowire()
         ->constructorParameter('schema_file', string('{app.project_root}/config/schema.graphql'))
         ->constructorParameter('entity_dir', string('{app.project_root}/src/Entity/'))
