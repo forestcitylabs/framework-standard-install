@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-use ForestCityLabs\Framework\GraphQL\ValueTransformer\DateTimeValueTransformer;
-
 /*
  * This file is part of the Forest City Labs Framework package.
  * (c) Forest City Labs <https://forestcitylabs.ca/>
@@ -30,8 +28,8 @@ return [
     })->parameter('environment', get('app.environment')),
 
     // GraphQL configuration.
-    'graphql.value_transformers' => add([
-        get(DateTimeValueTransformer::class),
+    'graphql.transformers' => add([
+        get(\ForestCityLabs\Framework\GraphQL\Transformer\DateTimeImmutableTransformer::class),
     ]),
 
     // Cache configuration.

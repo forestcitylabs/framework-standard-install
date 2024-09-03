@@ -1,29 +1,17 @@
 {
     "name": "forestcitylabs/framework-standard-install",
     "type": "project",
-    "license": "GPL-3.0-or-later",
     "autoload": {
         "psr-4": {
             "Application\\": "src/"
         }
-    },
-    "authors": [
-        {
-            "name": "Luke Bainbridge",
-            "email": "luke.bainbridge@gmail.com"
-        }
-    ],
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "config": {
-        "sort-packages": true
     },
     "require": {
         "cocur/slugify": "^4.5",
         "dflydev/fig-cookies": "^3.1",
         "doctrine/migrations": "^3.7",
         "doctrine/orm": "^3.0",
-        "forestcitylabs/framework": "dev-main",
+        "forestcitylabs/framework": "^1.0",
         "guzzlehttp/psr7": "^2.6",
         "http-interop/http-factory-guzzle": "^1.2",
         "http-interop/response-sender": "^1.0",
@@ -40,14 +28,7 @@
     },
     "require-dev": {
         "filp/whoops": "^2.15",
-        "kint-php/kint": "^5.1",
         "nette/php-generator": "^4.1",
-        "nikic/php-parser": "^5.0",
-        "psy/psysh": "^0.12.0"
-    },
-    "extra": {
-        "branch-aliase": {
-            "dev-main": "1.0.x-dev"
-        }
+        "nikic/php-parser": "^5.0"
     }
 }
