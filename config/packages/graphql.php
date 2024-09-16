@@ -16,6 +16,8 @@ use ForestCityLabs\Framework\Command\GraphQLValidateSchemaCommand;
 use ForestCityLabs\Framework\GraphQL\MetadataProvider;
 use ForestCityLabs\Framework\GraphQL\Transformer\TransformerManager;
 use ForestCityLabs\Framework\GraphQL\TypeRegistry;
+use ForestCityLabs\Framework\GraphQL\ValueTransformer\ChainedValueTransformer;
+use ForestCityLabs\Framework\GraphQL\ValueTransformer\ValueTransformerInterface;
 use ForestCityLabs\Framework\Middleware\GraphQLMiddleware;
 use ForestCityLabs\Framework\Utility\ClassDiscovery\ScanDirectoryDiscovery;
 use GraphQL\Type\Definition\Type;
@@ -51,7 +53,9 @@ return [
         ]);
     }),
     TransformerManager::class => autowire()
-      ->constructor(get('graphql.transformers')),
+        ->constructor(get('graphql.transformers')),
+    ValueTransformerInterface::class => autowire(ChainedValueTransformer::class)
+        ->constructor([]),
     GraphQLGenerateFromSchema::class => autowire()
         ->constructorParameter('schema_file', string('{app.project_root}/config/schema.graphql'))
         ->constructorParameter('entity_dir', string('{app.project_root}/src/Entity/'))
