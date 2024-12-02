@@ -47,8 +47,8 @@ return [
         ->constructorParameter('controller_discovery', get('graphql.controller_discovery')),
     Schema::class => factory(function (TypeRegistry $type_registry) {
         return new Schema([
-            'query' => $type_registry->getType('Query'),
-            'mutation' => $type_registry->getType('Mutation'),
+            'query' => $type_registry->getQueryType(),
+            'mutation' => $type_registry->getMutationType(),
             'typeLoader' => static fn (string $name): ?Type => $type_registry->getType($name),
         ]);
     }),
