@@ -1,5 +1,6 @@
 <?php
 
+use ForestCityLabs\Framework\Middleware\BearerTokenAuthenticationMiddleware;
 use ForestCityLabs\Framework\Middleware\OAuthMiddleware;
 use ForestCityLabs\Framework\Security\Attribute\RequiresScope;
 use ForestCityLabs\Framework\Security\OAuth\OAuthScopeRegistry;
@@ -29,4 +30,6 @@ return [
     // OAuth middleware.
     OAuthMiddleware::class => autowire()
         ->constructorParameter('redirect_path', get('oauth.redirect_uri')),
+    BearerTokenAuthenticationMiddleware::class => autowire()
+        ->constructorParameter('path_regex', get('security.token_auth_paths')),
 ];

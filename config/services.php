@@ -44,14 +44,6 @@ return [
         get('cache.pool.default'),
     ]),
 
-    // Session configuration.
-    'session.filesystem.adapter' => create(\League\Flysystem\Local\LocalFilesystemAdapter::class)
-        ->constructor(string('{app.project_root}/var/sessions')),
-    'session.filesystem' => create(\League\Flysystem\Filesystem::class)
-        ->constructor(get('session.filesystem.adapter')),
-    'session.driver' => create(\ForestCityLabs\Framework\Session\Driver\FilesystemSessionDriver::class)
-        ->constructor(get('session.filesystem')),
-
     // Logger configuration.
     'logger.path' => string('{app.project_root}/var/log/{app.environment}.log'),
     'logger.handlers' => add([
