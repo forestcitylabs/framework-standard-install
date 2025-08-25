@@ -27,6 +27,14 @@ return [
         return (bool) ('dev' === $environment);
     })->parameter('environment', get('app.environment')),
 
+    // Security configuration.
+    'security.cors.allow_origins' => add([]),
+    'security.cors.allow_methods' => add(['GET', 'POST', 'OPTIONS']),
+    'security.cors.allow_headers' => add(['Content-Type', 'Authorization']),
+    'security.allowed_hosts' => add([
+        env('TRUSTED_HOST', 'localhost'),
+    ]),
+
     // GraphQL configuration.
     'graphql.transformers' => add([
         get(\ForestCityLabs\Framework\GraphQL\Transformer\DateTimeImmutableTransformer::class),
@@ -54,7 +62,6 @@ return [
     'dbal.database_uri' => env('DATABASE_URI'),
 
     // ORM configuration.
-    'orm.proxy_directory' => string('{app.project_root}/var/cache/doctrine'),
     'orm.entity_paths' => add([
         string('{app.project_root}/src/Entity'),
     ]),
