@@ -28,8 +28,12 @@ use function DI\autowire;
 use function DI\create;
 use function DI\factory;
 use function DI\get;
+use function DI\string;
 
 return [
+    // Default ORM proxy directory.
+    'orm.proxy_directory' => string('{app.project_root}/var/cache/doctrine'),
+
     // Naming strategy and mapping driver.
     NamingStrategy::class => autowire(UnderscoreNamingStrategy::class),
     MappingDriver::class => autowire(AttributeDriver::class)
