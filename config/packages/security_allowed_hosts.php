@@ -6,14 +6,11 @@ use ForestCityLabs\Framework\Middleware\AllowedHostMiddleware;
 
 use function DI\add;
 use function DI\autowire;
-use function DI\env;
 use function DI\get;
 
 return [
     // Configuration values.
-    'security.allowed_hosts' => add([
-        env('TRUSTED_HOST', 'localhost'),
-    ]),
+    'security.allowed_hosts' => add([]),
 
     // Services.
     AllowedHostMiddleware::class => autowire()
