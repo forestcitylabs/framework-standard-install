@@ -22,13 +22,17 @@ use function DI\get;
 return [
     // Base roles.
     'security.roles' => add([]),
+    'security.hierarchy' => add([]),
     'security.requirements' => add([
         RequiresRole::class,
     ]),
 
     // Permission, scope and requirements registry.
     RoleRegistry::class => autowire()
-        ->constructor(get('security.roles')),
+        ->constructor(
+            get('security.roles'),
+            get('security.hierarchy')
+        ),
     RequirementRegistry::class => autowire()
         ->constructor(get('security.requirements')),
 
