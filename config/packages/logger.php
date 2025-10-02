@@ -9,20 +9,30 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
+use Monolog\Handler\FingersCrossedHandler;
 use Monolog\Handler\StreamHandler;
+use Monolog\Level;
 use Monolog\Logger;
 use Psr\Log\LoggerInterface;
 
 use function DI\autowire;
 use function DI\create;
+use function DI\factory;
 use function DI\get;
 use function DI\string;
 
 return [
     // Logger service configs.
+    FingersCrossedHandler::class => factory(function (StreamHandler $stream_handler, Level $level) {
+        return new FingersCrossedHandler($stream_handler, $level);
+    }),
     StreamHandler::class => create()
         ->constructor(get('logger.path')),
     LoggerInterface::class => autowire(Logger::class)
         ->constructor(string('{app.name}'))
         ->method('setHandlers', get('logger.handlers')),
+
+    Level::class => factory(function (bool $debug) {
+        return $debug ? Level::Debug : Level::Warning;
+    })->parameter('debug', get('app.debug')),
 ];

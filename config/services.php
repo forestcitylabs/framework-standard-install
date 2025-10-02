@@ -60,7 +60,7 @@ return [
     // Logger configuration.
     'logger.path' => string('{app.project_root}/var/log/{app.environment}.log'),
     'logger.handlers' => add([
-        get(\Monolog\Handler\StreamHandler::class),
+        get(\Monolog\Handler\FingersCrossedHandler::class),
     ]),
 
     // DBAL configuration.
