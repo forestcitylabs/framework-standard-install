@@ -58,7 +58,7 @@ return [
     ]),
 
     // Logger configuration.
-    'logger.path' => string('{app.project_root}/var/log/{app.environment}.log'),
+    'logger.path' => string('php://stderr'),
     'logger.handlers' => add([
         get(\Monolog\Handler\FingersCrossedHandler::class),
     ]),
