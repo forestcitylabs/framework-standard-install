@@ -45,5 +45,6 @@ return [
 
     // OIDC middleware configuration.
     OidcMiddleware::class => autowire()
-        ->constructorParameter('redirect_uri', get('oauth.redirect_uri')),
+        ->constructorParameter('redirect_uri', get('oauth.redirect_uri'))
+        ->constructorParameter('base_uri', get('app.base_uri')),
 ];

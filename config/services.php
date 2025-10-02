@@ -23,6 +23,9 @@ return [
     'app.environment' => env('ENVIRONMENT'),
     'app.project_root' => realpath(__DIR__ . '/..'),
     'app.web_root' => string('{app.project_root}/public'),
+    'app.base_uri' => factory(function (string $base_uri, \Psr\Http\Message\UriFactoryInterface $uf) {
+        return $uf->createUri($base_uri);
+    })->parameter('base_uri', env('BASE_URI', 'http://localhost:8080')),
     'app.debug' => factory(function (string $environment): bool {
         return (bool) ('dev' === $environment);
     })->parameter('environment', get('app.environment')),
