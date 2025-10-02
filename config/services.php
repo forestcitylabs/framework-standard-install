@@ -31,7 +31,9 @@ return [
     })->parameter('environment', get('app.environment')),
 
     // Security configuration.
-    'security.cors.allow_origins' => add([]),
+    'security.cors.allow_origins' => add([
+        env('BASE_URI', 'http://localhost:8080'),
+    ]),
     'security.cors.allow_methods' => add(['GET', 'POST', 'OPTIONS']),
     'security.cors.allow_headers' => add(['Content-Type', 'Authorization']),
     'security.allowed_hosts' => add([
