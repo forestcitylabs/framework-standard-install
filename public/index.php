@@ -12,6 +12,17 @@ require_once __DIR__ . '/../vendor/autoload.php';
 $dotenv = Dotenv::createImmutable(__DIR__ . '/..');
 $dotenv->safeLoad();
 
+// Disable error reporting in production.
+if ($_ENV['ENVIRONMENT'] ?? 'prod' === 'prod') {
+    error_reporting(0);
+    ini_set('display_errors', 0);
+    ini_set('display_startup_errors', 0);
+} else {
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+}
+
 // Create application kernel.
 $kernel = KernelFactory::createHttpKernel();
 
