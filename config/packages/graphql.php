@@ -63,9 +63,9 @@ return [
     GraphQLSchemaDiffCommand::class => autowire()
         ->constructorParameter('schema_file', string('{app.project_root}/config/schema.graphql')),
     'console.commands' => add([
-        get(GraphQLValidateSchemaCommand::class),
-        get(GraphQLDumpSchemaCommand::class),
-        get(GraphQLGenerateFromSchema::class),
-        get(GraphQLSchemaDiffCommand::class),
+        GraphQLValidateSchemaCommand::class,
+        GraphQLDumpSchemaCommand::class,
+        GraphQLGenerateFromSchema::class,
+        GraphQLSchemaDiffCommand::class,
     ])
 ];

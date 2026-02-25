@@ -96,14 +96,14 @@ return [
 
     // Add console commands.
     'console.commands' => add([
-        get(Command\SchemaTool\CreateCommand::class),
-        get(Command\SchemaTool\UpdateCommand::class),
-        get(Command\SchemaTool\DropCommand::class),
-        get(Command\GenerateProxiesCommand::class),
-        get(Command\RunDqlCommand::class),
-        get(Command\ValidateSchemaCommand::class),
-        get(Command\InfoCommand::class),
-        get(Command\MappingDescribeCommand::class),
+        Command\SchemaTool\CreateCommand::class,
+        Command\SchemaTool\UpdateCommand::class,
+        Command\SchemaTool\DropCommand::class,
+        Command\GenerateProxiesCommand::class,
+        Command\RunDqlCommand::class,
+        Command\ValidateSchemaCommand::class,
+        Command\InfoCommand::class,
+        Command\MappingDescribeCommand::class,
     ]),
 
     // Doctrine cache pool.

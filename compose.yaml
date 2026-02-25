@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  php:
+    build: .
+    environment:
+    - SERVER_NAME=":8080"
+    volumes:
+    - .:/app
+    - ./container/config/php/zz-custom.ini:/usr/local/etc/php/conf.d/zz-custom.ini:ro
+    - ./container/config/php/zz-xdebug.ini:/usr/local/etc/php/conf.d/zz-xdebug.ini:ro
+    ports:
+    - 8080:8080
+    depends_on:
+    - mysql
+    tty: true
+
+  mysql:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: app
+    volumes:
+    - dbdata:/var/lib/mysql
+    - ./container/data/mysql:/docker-entrypoint-initdb.d:ro
+
+volumes:
+  dbdata: ~
