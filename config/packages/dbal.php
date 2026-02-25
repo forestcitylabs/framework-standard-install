@@ -49,6 +49,6 @@ return [
 
     // Add console commands.
     'console.commands' => add([
-        get(Command\RunSqlCommand::class),
+        Command\RunSqlCommand::class,
     ]),
 ];

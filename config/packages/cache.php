@@ -28,6 +28,6 @@ return [
 
     // Console commands.
     'console.commands' => add([
-        get(CacheClearCommand::class),
+        CacheClearCommand::class,
     ]),
 ];

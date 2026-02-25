@@ -6,7 +6,6 @@ use Nette\PhpGenerator\PsrPrinter;
 
 use function DI\add;
 use function DI\autowire;
-use function DI\get;
 use function DI\string;
 
 return [
@@ -16,6 +15,6 @@ return [
         ->constructorParameter('namespace', 'Application\\Entity'),
 
     'console.commands' => add([
-        get(GenerateEntityCommand::class),
+        GenerateEntityCommand::class,
     ]),
 ];
