@@ -9,7 +9,6 @@
   },
   "require": {
     "cocur/slugify": "^4.5",
-    "dflydev/fig-cookies": "^3.1",
     "doctrine/migrations": "^3.7",
     "doctrine/orm": "^3.0",
     "forestcitylabs/framework": "^2.0@dev",
