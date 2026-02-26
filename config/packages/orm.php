@@ -58,6 +58,7 @@ return [
         $config->setNamingStrategy($naming_strategy);
         $config->setMetadataDriverImpl($mapping_driver);
         $config->setEntityListenerResolver($listener_resolver);
+        $config->enableNativeLazyObjects(true);
 
         return $config;
     })
