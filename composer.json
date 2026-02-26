@@ -12,7 +12,7 @@
     "cocur/slugify": "^4.5",
     "doctrine/migrations": "^3.7",
     "doctrine/orm": "^3.0",
-    "forestcitylabs/framework": "^2.0@dev",
+    "forestcitylabs/framework": "^2.0",
     "guzzlehttp/psr7": "^2.6",
     "http-interop/http-factory-guzzle": "^1.2",
     "http-interop/response-sender": "^1.0",
