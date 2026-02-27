@@ -13,6 +13,7 @@ use Predis\Client;
 use Predis\ClientInterface;
 
 use function DI\autowire;
+use function DI\env;
 use function DI\factory;
 use function DI\get;
 
@@ -27,9 +28,8 @@ return [
     })
         ->parameter('uri', get('redis.uri'))
         ->parameter('prefix', get('redis.prefix')),
-    'redis.session_client' => factory(function (string $uri, string $prefix) {
-        return new Client($uri, ['prefix' => $prefix . ':session:']);
-    })
-        ->parameter('uri', get('redis.uri'))
-        ->parameter('prefix', get('redis.prefix')),
+
+    // Redis configuration.
+    'redis.uri' => env('REDIS_URI'),
+    'redis.prefix' => env('REDIS_PREFIX', 'app'),
 ];

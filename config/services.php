@@ -47,24 +47,14 @@ return [
 
     // Cache configuration.
     'cache.paths' => add([string('{app.project_root}/var/cache/CompiledContainer.php')]),
-    'cache.adapter' => create(\League\Flysystem\Local\LocalFilesystemAdapter::class)
-        ->constructor(string('{app.project_root}/var/cache')),
-    'cache.filesystem' => create(\League\Flysystem\Filesystem::class)
-        ->constructor(get('cache.adapter')),
-    'cache.pool.default' => create(\ForestCityLabs\Framework\Cache\Pool\FilesystemCachePool::class)
-        ->constructor(get('cache.filesystem')),
-    'cache.pools' => add([
-        get('cache.pool.default'),
-    ]),
+    'cache.pool.default' => create(\ForestCityLabs\Framework\Cache\Pool\PredisCachePool::class)
+        ->constructor(get('redis.cache_client')),
 
     // Logger configuration.
     'logger.path' => string('php://stderr'),
     'logger.handlers' => add([
         get(\Monolog\Handler\FingersCrossedHandler::class),
     ]),
-
-    // DBAL configuration.
-    'dbal.database_uri' => env('DATABASE_URI'),
 
     // ORM configuration.
     'orm.entity_paths' => add([

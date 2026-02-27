@@ -57,7 +57,7 @@ return [
         ->constructorParameter('entity_dir', string('{app.project_root}/src/Entity/'))
         ->constructorParameter('entity_namespace', 'Application\\Entity')
         ->constructorParameter('entity_discovery', get('graphql.type_discovery'))
-        ->constructorParameter('controller_dir', string('{app.project_root}/src/Controller/'))
+        ->constructorParameter('controller_dir', string('{app.project_root}/src/Controller/GraphQL/'))
         ->constructorParameter('controller_namespace', 'Application\\Controller')
         ->constructorParameter('controller_discovery', get('graphql.controller_discovery')),
     GraphQLSchemaDiffCommand::class => autowire()

@@ -22,6 +22,7 @@ use Ramsey\Uuid\Doctrine\UuidType;
 
 use function DI\add;
 use function DI\autowire;
+use function DI\env;
 use function DI\factory;
 use function DI\get;
 
@@ -51,4 +52,7 @@ return [
     'console.commands' => add([
         Command\RunSqlCommand::class,
     ]),
+
+    // DBAL configuration.
+    'dbal.database_uri' => env('DATABASE_URI'),
 ];

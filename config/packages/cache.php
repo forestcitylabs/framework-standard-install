@@ -18,7 +18,9 @@ use function DI\get;
 
 return [
     'cache.paths' => add([]),
-    'cache.pools' => add([]),
+    'cache.pools' => add([
+        get('cache.pool.default'),
+    ]),
 
     // Auto-wire default cache pool.
     CacheItemPoolInterface::class => get('cache.pool.default'),
