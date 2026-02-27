@@ -37,6 +37,7 @@ class KernelFactory
             __DIR__ . '/../config/packages/security_cors.php',
             __DIR__ . '/../config/packages/twig.php',
             __DIR__ . '/../config/packages/utility.php',
+            __DIR__ . '/../config/packages/redis.php',
         ];
 
         if ((bool) ('dev' === getenv('ENVIRONMENT'))) {

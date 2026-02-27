@@ -1,5 +1,3 @@
-version: '3'
-
 services:
   php:
     build: .
@@ -12,17 +10,21 @@ services:
     ports:
     - 8080:8080
     depends_on:
-    - mysql
+    - db 
+    - cache
     tty: true
 
-  mysql:
-    image: mysql:8
+  db:
+    image: mariadb:12
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: app
     volumes:
     - dbdata:/var/lib/mysql
     - ./container/data/mysql:/docker-entrypoint-initdb.d:ro
+
+  cache:
+    image: valkey/valkey:9
 
 volumes:
   dbdata: ~
