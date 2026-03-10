@@ -40,7 +40,7 @@ class KernelFactory
             __DIR__ . '/../config/packages/redis.php',
         ];
 
-        if ((bool) ('dev' === getenv('ENVIRONMENT'))) {
+        if ((bool) ('dev' === $_ENV['ENVIRONMENT'])) {
             $packages[] = __DIR__ . '/../config/packages/development.php';
             $packages[] = __DIR__ . '/../config/packages/generator.php';
         }
@@ -62,7 +62,7 @@ class KernelFactory
         $builder->addDefinitions(__DIR__ . '/../config/services.php');
 
         // Write proxies to file and enable compilation.
-        if (!(bool) ('dev' === getenv('ENVIRONMENT'))) {
+        if (!(bool) ('dev' === $_ENV['ENVIRONMENT'])) {
             $builder->writeProxiesToFile(true, __DIR__ . '/../var/cache/proxies');
             $builder->enableCompilation(__DIR__ . '/../var/cache');
         }

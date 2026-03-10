@@ -9,13 +9,16 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
+use Psr\Container\ContainerInterface;
+use Psr\Log\LoggerInterface;
+use Whoops\Handler\PlainTextHandler;
 use Whoops\Handler\PrettyPageHandler;
 use Whoops\Run;
 
 use function DI\factory;
 
 return [
-    Run::class => factory(function () {
+    Run::class => factory(function (ContainerInterface $container) {
         $whoops = new Run();
 
         // Do not exit, we will handle it in a middleware.
@@ -23,8 +26,12 @@ return [
         $whoops->writeToOutput(false);
         $whoops->sendHttpCode(false);
 
-        // Push the pretty page handler.
-        $whoops->pushHandler(new PrettyPageHandler());
+        // Push the apporpriate handler.
+        if (PHP_SAPI === 'cli') {
+            $whoops->pushHandler(new PlainTextHandler($container->get(LoggerInterface::class)));
+        } else {
+            $whoops->pushHandler(new PrettyPageHandler());
+        }
 
         // Return handler.
         return $whoops;
