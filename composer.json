@@ -32,5 +32,8 @@
     "filp/whoops": "^2.15",
     "nette/php-generator": "^4.1",
     "nikic/php-parser": "^5.0"
+  },
+  "config": {
+    "sort-packages": true
   }
 }
