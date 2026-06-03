@@ -13,7 +13,7 @@ $dotenv = Dotenv::createImmutable(__DIR__ . '/..');
 $dotenv->safeLoad();
 
 // Disable error reporting in production.
-if ($_ENV['ENVIRONMENT'] ?? 'prod' === 'prod') {
+if ((bool) ('prod' === $_ENV['ENVIRONMENT'])) {
     error_reporting(0);
     ini_set('display_errors', 0);
     ini_set('display_startup_errors', 0);
